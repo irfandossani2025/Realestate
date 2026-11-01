@@ -21,6 +21,7 @@ class TransactionController extends Controller
             ->wherePivot('is_active', true)
             ->get();
         $companyIds = $companies->modelKeys();
+        $companyRoles = $companies->pluck('pivot.role', 'id');
         $transactions = PropertyTransaction::query()
             ->whereIn('company_id', $companyIds)
             ->with(['property', 'client', 'payments'])
@@ -29,7 +30,7 @@ class TransactionController extends Controller
         $properties = Property::query()->whereIn('company_id', $companyIds)->orderBy('title')->get();
         $clients = Contact::query()->whereIn('company_id', $companyIds)->orderBy('name')->get();
 
-        return view('transactions.index', compact('clients', 'companies', 'properties', 'transactions'));
+        return view('transactions.index', compact('clients', 'companies', 'companyRoles', 'properties', 'transactions'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -85,5 +86,18 @@ class TransactionController extends Controller
         ]);
 
         return redirect()->route('transactions.index')->with('success', 'Payment recorded and awaiting approval.');
+    }
+
+    public function approvePayment(Request $request, Payment $payment): RedirectResponse
+    {
+        $membership = $request->user()->companies()
+            ->where('companies.id', $payment->company_id)
+            ->wherePivot('is_active', true)
+            ->first();
+        abort_unless($membership && in_array($membership->pivot->role, ['admin', 'manager', 'finance'], true), 403);
+
+        $payment->update(['status' => 'approved']);
+
+        return redirect()->route('transactions.index')->with('success', 'Payment approved and included in collections.');
     }
 }

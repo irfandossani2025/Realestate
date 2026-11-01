@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Company;
 use App\Models\Contact;
+use App\Models\Payment;
 use App\Models\Property;
 use App\Models\PropertyTransaction;
 use App\Models\User;
@@ -33,5 +34,11 @@ class TransactionWorkflowTest extends TestCase
         ])->assertRedirectToRoute('transactions.index');
 
         $this->assertDatabaseHas('payments', ['property_transaction_id' => $transaction->id, 'amount' => 5000, 'status' => 'pending']);
+
+        $financeUser = User::factory()->create();
+        $financeUser->companies()->attach($company, ['role' => 'finance', 'is_active' => true]);
+        $payment = Payment::query()->firstOrFail();
+        $this->actingAs($financeUser)->patch(route('payments.approve', $payment))->assertRedirectToRoute('transactions.index');
+        $this->assertDatabaseHas('payments', ['id' => $payment->id, 'status' => 'approved']);
     }
 }

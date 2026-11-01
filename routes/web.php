@@ -25,4 +25,5 @@ Route::middleware('auth')->group(function (): void {
     Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
     Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
     Route::post('/transactions/{transaction}/payments', [TransactionController::class, 'storePayment'])->name('transactions.payments.store');
+    Route::patch('/payments/{payment}/approve', [TransactionController::class, 'approvePayment'])->name('payments.approve');
 });
