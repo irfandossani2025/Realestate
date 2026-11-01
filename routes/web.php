@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\LeaseController;
+use App\Http\Controllers\MailboxAdminController;
 use App\Http\Controllers\MailCentreController;
 use App\Http\Controllers\MaintenanceRequestController;
 use App\Http\Controllers\OwnerStatementController;
@@ -52,6 +53,8 @@ Route::middleware('auth')->group(function (): void {
     Route::get('/maintenance', [MaintenanceRequestController::class, 'index'])->name('maintenance.index');
     Route::post('/maintenance', [MaintenanceRequestController::class, 'store'])->name('maintenance.store');
     Route::get('/mail', [MailCentreController::class, 'index'])->name('mail.index');
+    Route::get('/mail/settings', [MailboxAdminController::class, 'index'])->name('mail.settings');
+    Route::post('/mail/settings', [MailboxAdminController::class, 'store'])->name('mail.settings.store');
     Route::get('/staff', [StaffController::class, 'index'])->name('staff.index');
     Route::post('/staff', [StaffController::class, 'store'])->name('staff.store');
     Route::get('/leases', [LeaseController::class, 'index'])->name('leases.index');
