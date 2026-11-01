@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LeadController;
+use App\Http\Controllers\MailCentreController;
 use App\Http\Controllers\MaintenanceRequestController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\ReportController;
@@ -41,4 +42,5 @@ Route::middleware('auth')->group(function (): void {
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
     Route::get('/maintenance', [MaintenanceRequestController::class, 'index'])->name('maintenance.index');
     Route::post('/maintenance', [MaintenanceRequestController::class, 'store'])->name('maintenance.store');
+    Route::get('/mail', [MailCentreController::class, 'index'])->name('mail.index');
 });

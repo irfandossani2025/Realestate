@@ -26,6 +26,12 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    /** @return BelongsToMany<Mailbox, $this> */
+    public function mailboxes(): BelongsToMany
+    {
+        return $this->belongsToMany(Mailbox::class)->withPivot('can_send')->withTimestamps();
+    }
+
     /**
      * Get the attributes that should be cast.
      *
