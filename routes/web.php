@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CommissionController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LeadController;
@@ -61,4 +62,6 @@ Route::middleware('auth')->group(function (): void {
     Route::get('/viewings', [ViewingController::class, 'index'])->name('viewings.index');
     Route::post('/viewings', [ViewingController::class, 'store'])->name('viewings.store');
     Route::patch('/viewings/{viewing}', [ViewingController::class, 'update'])->name('viewings.update');
+    Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
+    Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');
 });

@@ -14,6 +14,7 @@
         <div class="nav-label">Operations</div><nav class="nav">
             <a class="{{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">{{ __('Overview') }}</a>
             <a class="{{ request()->routeIs('leads.*') ? 'active' : '' }}" href="{{ route('leads.index') }}">{{ __('Leads & CRM') }}</a>
+            <a class="{{ request()->routeIs('contacts.*') ? 'active' : '' }}" href="{{ route('contacts.index') }}">{{ __('Contacts') }}</a>
             <a class="{{ request()->routeIs('properties.*') ? 'active' : '' }}" href="{{ route('properties.index') }}">{{ __('Properties') }}</a>
             <a class="{{ request()->routeIs('valuations.*') ? 'active' : '' }}" href="{{ route('valuations.index') }}">{{ __('Evaluations') }}</a>
             <a class="{{ request()->routeIs('transactions.*') ? 'active' : '' }}" href="{{ route('transactions.index') }}">{{ __('Sales & Rentals') }}</a>
