@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Lead;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
@@ -44,7 +45,7 @@ class LeadController extends Controller
         Lead::query()->create([
             ...$data,
             'contact_id' => $contact->id,
-            'reference' => 'LD-'.now()->format('ymd').'-'.str_pad((string) (Lead::count() + 1), 4, '0', STR_PAD_LEFT),
+            'reference' => 'LD-'.now()->format('ymd').'-'.Str::upper(Str::random(6)),
             'status' => 'new',
             'assigned_to' => $request->user()->id,
         ]);

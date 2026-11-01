@@ -38,14 +38,16 @@ class StaffController extends Controller
             'company_id' => ['required', Rule::in($companies->modelKeys())],
             'role' => ['required', Rule::in(self::ROLES)],
         ]);
+        $managedCompany = $companies->firstWhere('id', (int) $data['company_id']);
+        if ($data['role'] === 'admin' && $managedCompany->pivot->role !== 'admin') {
+            abort(403);
+        }
         $user = User::query()->where('email', $data['email'])->first();
         if (! $user && empty($data['password'])) {
             throw ValidationException::withMessages(['password' => 'A password is required for a new employee.']);
         }
         if (! $user) {
             $user = User::query()->create(['name' => $data['name'], 'email' => $data['email'], 'password' => Hash::make($data['password'])]);
-        } else {
-            $user->update(array_filter(['name' => $data['name'], 'password' => empty($data['password']) ? null : Hash::make($data['password'])]));
         }
         $user->companies()->syncWithoutDetaching([$data['company_id'] => ['role' => $data['role'], 'is_active' => true]]);
 

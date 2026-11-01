@@ -7,6 +7,7 @@ use App\Models\Property;
 use App\Models\ValuationRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
@@ -39,7 +40,7 @@ class ValuationRequestController extends Controller
         if (! empty($data['contact_id'])) {
             $data['contact_id'] = Contact::query()->whereIn('company_id', $accessibleCompanyIds)->findOrFail($data['contact_id'])->id;
         }
-        ValuationRequest::query()->create([...$data, 'reference' => 'VAL-'.now()->format('ymd').'-'.str_pad((string) (ValuationRequest::count() + 1), 4, '0', STR_PAD_LEFT), 'status' => 'requested', 'evaluator_id' => $request->user()->id]);
+        ValuationRequest::query()->create([...$data, 'reference' => 'VAL-'.now()->format('ymd').'-'.Str::upper(Str::random(6)), 'status' => 'requested', 'evaluator_id' => $request->user()->id]);
 
         return redirect()->route('valuations.index')->with('success', 'Valuation request created.');
     }

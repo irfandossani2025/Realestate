@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Company;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 class StaffManagementTest extends TestCase
@@ -33,5 +34,24 @@ class StaffManagementTest extends TestCase
         $staff->companies()->attach($company, ['role' => 'evaluator', 'is_active' => true]);
 
         $this->actingAs($staff)->get(route('staff.index'))->assertForbidden();
+    }
+
+    public function test_manager_cannot_promote_admin_or_reset_existing_users_password(): void
+    {
+        $company = Company::query()->create(['name' => 'Meyar', 'slug' => 'meyar', 'domain' => 'meyarforvaluation.com', 'business_type' => 'valuation']);
+        $manager = User::factory()->create();
+        $existing = User::factory()->create(['email' => 'shared@meyarforvaluation.com', 'password' => Hash::make('original-password')]);
+        $manager->companies()->attach($company, ['role' => 'manager', 'is_active' => true]);
+
+        $this->actingAs($manager)->post(route('staff.store'), [
+            'name' => 'Shared User', 'email' => $existing->email, 'password' => 'replacement-password',
+            'company_id' => $company->id, 'role' => 'evaluator',
+        ])->assertRedirectToRoute('staff.index');
+        $this->assertTrue(Hash::check('original-password', $existing->fresh()->password));
+
+        $this->actingAs($manager)->post(route('staff.store'), [
+            'name' => 'Shared User', 'email' => $existing->email,
+            'company_id' => $company->id, 'role' => 'admin',
+        ])->assertForbidden();
     }
 }

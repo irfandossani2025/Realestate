@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Property;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
@@ -43,7 +44,7 @@ class PropertyController extends Controller
 
         Property::query()->create([
             ...$data,
-            'reference' => 'RE-'.now()->format('ymd').'-'.str_pad((string) (Property::count() + 1), 4, '0', STR_PAD_LEFT),
+            'reference' => 'RE-'.now()->format('ymd').'-'.Str::upper(Str::random(6)),
             'status' => 'draft',
             'publication_status' => 'internal',
         ]);
