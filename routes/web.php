@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function (): void {
     Route::post('/leads', [LeadController::class, 'store'])->name('leads.store');
     Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
     Route::post('/properties', [PropertyController::class, 'store'])->name('properties.store');
+    Route::patch('/properties/{property}/publication', [PropertyController::class, 'updatePublication'])->name('properties.publication.update');
     Route::get('/valuations', [ValuationRequestController::class, 'index'])->name('valuations.index');
     Route::post('/valuations', [ValuationRequestController::class, 'store'])->name('valuations.store');
     Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');

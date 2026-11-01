@@ -13,13 +13,14 @@ class PropertyController extends Controller
     public function index(Request $request): View
     {
         $companies = $request->user()->companies()->wherePivot('is_active', true)->orderBy('name')->get();
+        $companyRoles = $companies->pluck('pivot.role', 'id');
         $properties = Property::query()
             ->whereIn('company_id', $companies->modelKeys())
             ->with(['company', 'owner'])
             ->latest()
             ->paginate(15);
 
-        return view('properties.index', compact('companies', 'properties'));
+        return view('properties.index', compact('companies', 'companyRoles', 'properties'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -48,5 +49,29 @@ class PropertyController extends Controller
         ]);
 
         return redirect()->route('properties.index')->with('success', 'Property saved as an internal draft.');
+    }
+
+    public function updatePublication(Request $request, Property $property): RedirectResponse
+    {
+        $membership = $request->user()->companies()
+            ->where('companies.id', $property->company_id)
+            ->wherePivot('is_active', true)
+            ->first();
+        abort_unless($membership, 403);
+
+        $data = $request->validate([
+            'publication_status' => ['required', Rule::in(['internal', 'review', 'approved', 'published', 'hidden'])],
+        ]);
+        $managerStates = ['approved', 'published', 'hidden'];
+        if (in_array($data['publication_status'], $managerStates, true)) {
+            abort_unless(in_array($membership->pivot->role, ['admin', 'manager', 'marketing_manager'], true), 403);
+        }
+
+        $property->update([
+            'publication_status' => $data['publication_status'],
+            'published_at' => $data['publication_status'] === 'published' ? now() : null,
+        ]);
+
+        return redirect()->route('properties.index')->with('success', 'Publication status updated.');
     }
 }
