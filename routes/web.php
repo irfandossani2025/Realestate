@@ -15,6 +15,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ValuationRequestController;
+use App\Http\Controllers\ViewingController;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Route;
 
@@ -57,4 +58,7 @@ Route::middleware('auth')->group(function (): void {
     Route::get('/commissions', [CommissionController::class, 'index'])->name('commissions.index');
     Route::post('/commissions', [CommissionController::class, 'store'])->name('commissions.store');
     Route::get('/owner-statements', [OwnerStatementController::class, 'index'])->name('owners.statements');
+    Route::get('/viewings', [ViewingController::class, 'index'])->name('viewings.index');
+    Route::post('/viewings', [ViewingController::class, 'store'])->name('viewings.store');
+    Route::patch('/viewings/{viewing}', [ViewingController::class, 'update'])->name('viewings.update');
 });

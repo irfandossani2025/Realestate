@@ -17,11 +17,15 @@
             <a class="{{ request()->routeIs('properties.*') ? 'active' : '' }}" href="{{ route('properties.index') }}">{{ __('Properties') }}</a>
             <a class="{{ request()->routeIs('valuations.*') ? 'active' : '' }}" href="{{ route('valuations.index') }}">{{ __('Evaluations') }}</a>
             <a class="{{ request()->routeIs('transactions.*') ? 'active' : '' }}" href="{{ route('transactions.index') }}">{{ __('Sales & Rentals') }}</a>
+            <a class="{{ request()->routeIs('viewings.*') ? 'active' : '' }}" href="{{ route('viewings.index') }}">{{ __('Viewings') }}</a>
+            <a class="{{ request()->routeIs('leases.*') ? 'active' : '' }}" href="{{ route('leases.index') }}">{{ __('Leases') }}</a>
             <a class="{{ request()->routeIs('maintenance.*') ? 'active' : '' }}" href="{{ route('maintenance.index') }}">{{ __('Maintenance') }}</a>
         </nav><div class="nav-label">Business</div><nav class="nav">
             <a class="{{ request()->routeIs('invoices.*') ? 'active' : '' }}" href="{{ route('invoices.index') }}">{{ __('Invoices') }}</a>
             <a class="{{ request()->routeIs('mail.*') ? 'active' : '' }}" href="{{ route('mail.index') }}">{{ __('Mail Centre') }}</a>
             <a class="{{ request()->routeIs('reports.*') ? 'active' : '' }}" href="{{ route('reports.index') }}">{{ __('Reports') }}</a>
+            <a class="{{ request()->routeIs('commissions.*') ? 'active' : '' }}" href="{{ route('commissions.index') }}">{{ __('Commissions') }}</a>
+            <a class="{{ request()->routeIs('owners.*') ? 'active' : '' }}" href="{{ route('owners.statements') }}">{{ __('Owner Statements') }}</a>
             <a class="{{ request()->routeIs('staff.*') ? 'active' : '' }}" href="{{ route('staff.index') }}">{{ __('Staff & Access') }}</a>
         </nav><div class="side-foot"><a href="{{ route('locale.update', app()->getLocale() === 'ar' ? 'en' : 'ar') }}">{{ app()->getLocale() === 'ar' ? 'English' : 'العربية' }}</a><form method="POST" action="{{ route('logout') }}">@csrf<button class="logout">{{ __('Sign out') }}</button></form></div>
     </aside>

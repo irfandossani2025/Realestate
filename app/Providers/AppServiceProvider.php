@@ -12,6 +12,7 @@ use App\Models\Payment;
 use App\Models\Property;
 use App\Models\PropertyTransaction;
 use App\Models\ValuationRequest;
+use App\Models\Viewing;
 use App\Observers\AuditableObserver;
 use Illuminate\Support\ServiceProvider;
 
@@ -30,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        foreach ([Property::class, Lead::class, Lease::class, Commission::class, ValuationRequest::class, PropertyTransaction::class, Payment::class, Invoice::class, MaintenanceRequest::class, Document::class] as $model) {
+        foreach ([Property::class, Lead::class, Lease::class, Commission::class, ValuationRequest::class, Viewing::class, PropertyTransaction::class, Payment::class, Invoice::class, MaintenanceRequest::class, Document::class] as $model) {
             $model::observe(AuditableObserver::class);
         }
     }
