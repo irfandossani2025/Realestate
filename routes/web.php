@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ValuationRequestController;
 use Illuminate\Support\Facades\Route;
@@ -29,4 +30,5 @@ Route::middleware('auth')->group(function (): void {
     Route::patch('/payments/{payment}/approve', [TransactionController::class, 'approvePayment'])->name('payments.approve');
     Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
     Route::post('/invoices', [InvoiceController::class, 'store'])->name('invoices.store');
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
 });

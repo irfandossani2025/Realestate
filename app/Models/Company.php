@@ -38,4 +38,22 @@ class Company extends Model
     {
         return $this->hasMany(Lead::class);
     }
+
+    /** @return HasMany<PropertyTransaction, $this> */
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(PropertyTransaction::class);
+    }
+
+    /** @return HasMany<Payment, $this> */
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    /** @return HasMany<Invoice, $this> */
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(Invoice::class);
+    }
 }
