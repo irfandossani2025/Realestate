@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\PropertyController;
@@ -12,9 +13,7 @@ Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('l
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login.store');
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
-Route::middleware('auth')->get('/', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::middleware('auth')->get('/', DashboardController::class)->name('dashboard');
 
 Route::middleware('auth')->group(function (): void {
     Route::get('/leads', [LeadController::class, 'index'])->name('leads.index');
