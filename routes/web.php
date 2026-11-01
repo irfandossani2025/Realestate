@@ -8,6 +8,7 @@ use App\Http\Controllers\LeadController;
 use App\Http\Controllers\LeaseController;
 use App\Http\Controllers\MailCentreController;
 use App\Http\Controllers\MaintenanceRequestController;
+use App\Http\Controllers\OwnerStatementController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\PropertyDocumentController;
 use App\Http\Controllers\ReportController;
@@ -55,4 +56,5 @@ Route::middleware('auth')->group(function (): void {
     Route::post('/leases', [LeaseController::class, 'store'])->name('leases.store');
     Route::get('/commissions', [CommissionController::class, 'index'])->name('commissions.index');
     Route::post('/commissions', [CommissionController::class, 'store'])->name('commissions.store');
+    Route::get('/owner-statements', [OwnerStatementController::class, 'index'])->name('owners.statements');
 });
