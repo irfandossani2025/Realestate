@@ -40,7 +40,7 @@ return new class extends Migration
             $table->string('folder')->default('inbox');
             $table->string('from_address');
             $table->string('from_name')->nullable();
-            $table->json('to_addresses');
+            $table->longText('to_addresses');
             $table->string('subject')->nullable();
             $table->text('preview')->nullable();
             $table->longText('body_html')->nullable();

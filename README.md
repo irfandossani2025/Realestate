@@ -43,3 +43,5 @@ docker run --rm -v "$PWD:/app" -w /app composer:2 php artisan test
 ## Deployment target
 
 The intended production host is Plesk at `realestate.techittechnologies.com`. Deployment will be performed only after the application workflow is implemented, tested, and Plesk access is provided.
+
+See [the Plesk deployment runbook](docs/PLESK_DEPLOYMENT.md) for host requirements, secure environment configuration, deployment commands, and post-deployment checks.
