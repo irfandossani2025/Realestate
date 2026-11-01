@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function (): void {
     Route::post('/properties/{property}/documents', [PropertyDocumentController::class, 'store'])->name('properties.documents.store');
     Route::get('/valuations', [ValuationRequestController::class, 'index'])->name('valuations.index');
     Route::post('/valuations', [ValuationRequestController::class, 'store'])->name('valuations.store');
+    Route::patch('/valuations/{valuation}/status', [ValuationRequestController::class, 'updateStatus'])->name('valuations.status.update');
     Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
     Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
     Route::post('/transactions/{transaction}/payments', [TransactionController::class, 'storePayment'])->name('transactions.payments.store');
