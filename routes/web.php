@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LeadController;
@@ -52,4 +53,6 @@ Route::middleware('auth')->group(function (): void {
     Route::post('/staff', [StaffController::class, 'store'])->name('staff.store');
     Route::get('/leases', [LeaseController::class, 'index'])->name('leases.index');
     Route::post('/leases', [LeaseController::class, 'store'])->name('leases.store');
+    Route::get('/commissions', [CommissionController::class, 'index'])->name('commissions.index');
+    Route::post('/commissions', [CommissionController::class, 'store'])->name('commissions.store');
 });

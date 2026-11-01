@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Commission;
 use App\Models\Document;
 use App\Models\Invoice;
 use App\Models\Lead;
@@ -29,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        foreach ([Property::class, Lead::class, Lease::class, ValuationRequest::class, PropertyTransaction::class, Payment::class, Invoice::class, MaintenanceRequest::class, Document::class] as $model) {
+        foreach ([Property::class, Lead::class, Lease::class, Commission::class, ValuationRequest::class, PropertyTransaction::class, Payment::class, Invoice::class, MaintenanceRequest::class, Document::class] as $model) {
             $model::observe(AuditableObserver::class);
         }
     }
