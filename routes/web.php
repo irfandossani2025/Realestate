@@ -7,6 +7,7 @@ use App\Http\Controllers\LeadController;
 use App\Http\Controllers\MailCentreController;
 use App\Http\Controllers\MaintenanceRequestController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\PropertyDocumentController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\TransactionController;
@@ -32,6 +33,7 @@ Route::middleware('auth')->group(function (): void {
     Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
     Route::post('/properties', [PropertyController::class, 'store'])->name('properties.store');
     Route::patch('/properties/{property}/publication', [PropertyController::class, 'updatePublication'])->name('properties.publication.update');
+    Route::post('/properties/{property}/documents', [PropertyDocumentController::class, 'store'])->name('properties.documents.store');
     Route::get('/valuations', [ValuationRequestController::class, 'index'])->name('valuations.index');
     Route::post('/valuations', [ValuationRequestController::class, 'store'])->name('valuations.store');
     Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
