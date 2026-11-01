@@ -8,6 +8,7 @@ use App\Http\Controllers\MailCentreController;
 use App\Http\Controllers\MaintenanceRequestController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ValuationRequestController;
 use Illuminate\Http\RedirectResponse;
@@ -43,4 +44,6 @@ Route::middleware('auth')->group(function (): void {
     Route::get('/maintenance', [MaintenanceRequestController::class, 'index'])->name('maintenance.index');
     Route::post('/maintenance', [MaintenanceRequestController::class, 'store'])->name('maintenance.store');
     Route::get('/mail', [MailCentreController::class, 'index'])->name('mail.index');
+    Route::get('/staff', [StaffController::class, 'index'])->name('staff.index');
+    Route::post('/staff', [StaffController::class, 'store'])->name('staff.store');
 });
