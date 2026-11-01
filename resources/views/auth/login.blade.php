@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sign in | Riwaq ERP</title>
+    <title>{{ __('Sign in') }} | Riwaq ERP</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
 <body>
 <div class="layout">
     <section class="welcome"><div class="brand"><div class="mark">R</div><div><b>Riwaq</b><small>Real estate ERP</small></div></div><div><h1>One calm place for every important move.</h1><p>Manage your group’s marketing, valuations, properties, sales, rentals, and client conversations with clarity.</p></div><div class="companies"><span>Meyar Valuation</span><span>Marsous Marketing</span><span>Al Ramz Realty</span></div></section>
-    <main class="form-area"><button class="language" type="button">العربية</button><h2>Welcome back</h2><p class="intro">Sign in with your work email to continue.</p><form method="POST" action="{{ route('login.store') }}">@csrf<div class="field"><label for="email"><span>Work email</span><input id="email" name="email" type="email" value="{{ old('email') }}" autocomplete="email" required autofocus></label>@error('email')<span class="error">{{ $message }}</span>@enderror</div><div class="field"><label for="password"><span>Password</span><input id="password" name="password" type="password" autocomplete="current-password" required></label></div><label class="remember"><input type="checkbox" name="remember" value="1"> Keep me signed in on this device</label><button class="submit" type="submit">Sign in securely →</button></form><p class="note">Your access is protected and managed by your company administrator.</p></main>
+    <main class="form-area"><a class="language" href="{{ route('locale.update', app()->getLocale() === 'ar' ? 'en' : 'ar') }}">{{ app()->getLocale() === 'ar' ? 'English' : 'العربية' }}</a><h2>{{ __('Welcome back') }}</h2><p class="intro">{{ __('Sign in with your work email to continue.') }}</p><form method="POST" action="{{ route('login.store') }}">@csrf<div class="field"><label for="email"><span>{{ __('Work email') }}</span><input id="email" name="email" type="email" value="{{ old('email') }}" autocomplete="email" required autofocus></label>@error('email')<span class="error">{{ $message }}</span>@enderror</div><div class="field"><label for="password"><span>{{ __('Password') }}</span><input id="password" name="password" type="password" autocomplete="current-password" required></label></div><label class="remember"><input type="checkbox" name="remember" value="1"> {{ __('Keep me signed in on this device') }}</label><button class="submit" type="submit">{{ __('Sign in securely') }} →</button></form><p class="note">{{ __('Your access is protected and managed by your company administrator.') }}</p></main>
 </div>
 </body>
 </html>
