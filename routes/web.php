@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\LeadController;
+use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
@@ -10,3 +12,10 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name
 Route::middleware('auth')->get('/', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::middleware('auth')->group(function (): void {
+    Route::get('/leads', [LeadController::class, 'index'])->name('leads.index');
+    Route::post('/leads', [LeadController::class, 'store'])->name('leads.store');
+    Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
+    Route::post('/properties', [PropertyController::class, 'store'])->name('properties.store');
+});
