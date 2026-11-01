@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\ValuationRequestController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
@@ -18,4 +19,6 @@ Route::middleware('auth')->group(function (): void {
     Route::post('/leads', [LeadController::class, 'store'])->name('leads.store');
     Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
     Route::post('/properties', [PropertyController::class, 'store'])->name('properties.store');
+    Route::get('/valuations', [ValuationRequestController::class, 'index'])->name('valuations.index');
+    Route::post('/valuations', [ValuationRequestController::class, 'store'])->name('valuations.store');
 });
