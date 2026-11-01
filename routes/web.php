@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ValuationRequestController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,4 +22,7 @@ Route::middleware('auth')->group(function (): void {
     Route::post('/properties', [PropertyController::class, 'store'])->name('properties.store');
     Route::get('/valuations', [ValuationRequestController::class, 'index'])->name('valuations.index');
     Route::post('/valuations', [ValuationRequestController::class, 'store'])->name('valuations.store');
+    Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
+    Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
+    Route::post('/transactions/{transaction}/payments', [TransactionController::class, 'storePayment'])->name('transactions.payments.store');
 });
