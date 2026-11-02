@@ -226,5 +226,21 @@
     "Rental": "إيجار",
     "Agreed value (OMR)": "القيمة المتفق عليها (ر.ع.)",
     "Agreement date": "تاريخ الاتفاقية",
-    "Create draft transaction": "إنشاء معاملة مسودة"
+    "Create draft transaction": "إنشاء معاملة مسودة",
+    "Track property issues, priorities, schedules, and costs.": "تابعي مشكلات العقارات والأولويات والجداول والتكاليف.",
+    "Requests": "الطلبات",
+    "No maintenance requests.": "لا توجد طلبات صيانة.",
+    "Request": "الطلب",
+    "Priority": "الأولوية",
+    "Estimate": "التقدير",
+    "Open request": "فتح طلب",
+    "Issue title": "عنوان المشكلة",
+    "Low": "منخفضة",
+    "Normal": "عادية",
+    "High": "مرتفعة",
+    "Urgent": "عاجلة",
+    "Estimate (OMR)": "التكلفة التقديرية (ر.ع.)",
+    "In Progress": "قيد التنفيذ",
+    "Resolved": "تم الحل",
+    "Closed": "مغلق"
 }
