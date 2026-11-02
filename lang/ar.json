@@ -153,5 +153,14 @@
     "Inspected": "تمت المعاينة",
     "Drafting": "قيد الإعداد",
     "Completed": "مكتمل",
-    "Cancelled": "ملغي"
+    "Cancelled": "ملغي",
+    "Appointments, confirmations, assigned agents, and outcomes.": "المواعيد والتأكيدات والموظفات المكلّفات ونتائج المعاينات.",
+    "Appointment schedule": "جدول المواعيد",
+    "No viewings scheduled.": "لا توجد معاينات مجدولة.",
+    "When": "الموعد",
+    "Agent": "المسؤولة",
+    "Schedule viewing": "جدولة معاينة",
+    "Date and time": "التاريخ والوقت",
+    "Confirmed": "مؤكد",
+    "No Show": "لم يحضر"
 }
